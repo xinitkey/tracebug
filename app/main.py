@@ -1,13 +1,12 @@
 from fastapi import FastAPI
+import uvicorn
+from app.api.routers.auth import router as auth_router
+from app.api.routers.health import router as health_router
+
 
 app = FastAPI()
+app.include_router(auth_router)
+app.include_router(health_router)
 
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str | None = None):
-    return {"item_id": item_id, "q": q}
+if __name__ == "__main__":
+    uvicorn.run("app.main:app", reload=True)
