@@ -1,15 +1,11 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
-
-
-class Auth(BaseModel):
-    name: str
-    age: int
-
+from app.schemas.user import UserCreate
+from app.services.user import create_user
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
-@router.post("/auth")
-async def login(auth: Auth):
-    return auth
+@router.post("/auth/register")
+async def register(data: UserCreate):
+    user = create_user(data)
+    return user
