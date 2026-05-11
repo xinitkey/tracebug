@@ -5,10 +5,9 @@ import uvicorn
 from app.core.config import settings
 from app.db.base import Base
 from app.db.session import engine
-from app.db import models
+
 from app.api.routers.auth import router as auth_router
 from app.api.routers.health import router as health_router
-from app.api.routers.testdb import router as testdb_router
 
 
 @asynccontextmanager
@@ -25,7 +24,6 @@ app = FastAPI(
 
 app.include_router(auth_router)
 app.include_router(health_router)
-app.include_router(testdb_router)
 
 if __name__ == "__main__":
     uvicorn.run("app.main:app", reload=True)

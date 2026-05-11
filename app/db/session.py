@@ -3,6 +3,8 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     create_async_engine,
 )
+from fastapi import Depends
+from typing import Annotated
 
 from app.core.config import settings
 
@@ -27,3 +29,6 @@ SessionLocal = async_sessionmaker(
 async def get_db():
     async with SessionLocal() as session:
         yield session
+
+
+SessionDep = Annotated[AsyncSession, Depends(get_db)]
