@@ -11,11 +11,13 @@ from app.db.models.user import UserModel
 from app.db.session import SessionDep
 from app.schemas.auth import Token, TokenData
 from app.schemas.user import UserCreate, UserRead
+
 from app.services.user import (
     authenticate_user,
     create_user,
     get_user as get_user_by_username,
 )
+
 from app.core.security import (
     ACCESS_TOKEN_EXPIRES_MINUTES,
     ALGORITHM,
